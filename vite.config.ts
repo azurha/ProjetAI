@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import adonisjs from '@adonisjs/vite/client'
+import UnoCSS from 'unocss/vite'
+import presetUno from '@unocss/preset-uno'
 
 export default defineConfig({
   plugins: [
@@ -14,6 +16,11 @@ export default defineConfig({
        * Paths to watch and reload the browser on file change
        */
       reload: ['resources/views/**/*.edge'],
+    }),
+    UnoCSS({
+      presets: [
+        presetUno()
+      ],
     }),
   ],
 })

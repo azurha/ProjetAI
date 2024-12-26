@@ -48,6 +48,7 @@
     "prettier": "^3.4.2",
     "ts-node-maintained": "^10.9.4",
     "typescript": "~5.7",
+    "unocss": "^0.65.3",
     "vite": "^6.0.3"
   },
   "dependencies": {
