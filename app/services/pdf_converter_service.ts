@@ -11,7 +11,7 @@ interface PdfOptions {
 
 export default class PdfConverterService {
   private static defaultOptions: PdfOptions = {
-    density: 100,
+    density: 600,
     saveFilename: 'converted',
     savePath: './tmp',
     format: 'png',

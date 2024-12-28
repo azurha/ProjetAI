@@ -1,6 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import PdfConverterService from '#services/pdf_converter_service'
-import { Application } from '@adonisjs/core/app'
 
 export default class PdfConverterController {
   public async show({ request, view }: HttpContext) {
@@ -10,7 +9,7 @@ export default class PdfConverterController {
     return view.render('pages/pdf-converter')
   }
 
-  public async convert({ request, response }: HttpContext) {
+  public async convert({ request, response, session, view }: HttpContext) {
     try {
       const pdfFile = request.file('pdf', {
         size: '10mb',
@@ -18,10 +17,10 @@ export default class PdfConverterController {
       })
 
       if (!pdfFile) {
-        return response.badRequest('Aucun fichier PDF fourni')
+        session.flash('error', 'Aucun fichier PDF fourni')
+        return response.redirect().back()
       }
 
-      // Déplace le fichier vers un dossier temporaire
       await pdfFile.move('./tmp/uploads', {
         name: `${new Date().getTime()}.pdf`,
       })
@@ -30,16 +29,18 @@ export default class PdfConverterController {
         savePath: './tmp/converted',
       })
 
-      return response.json({
-        status: 'success',
-        data: results,
-      })
+      session.flash('success', 'Conversion réussie')
+      session.flash('results', results)
+      if (request.header('X-Up-Version')) {
+        return view.render('components/partials/pdf-converter')
+      }
+      return view.render('pages/pdf-converter')
     } catch (error) {
-      return response.status(500).json({
-        status: 'error',
-        message: 'Erreur lors de la conversion',
-        error: error.message,
-      })
+      session.flash('error', 'Erreur lors de la conversion: ' + error.message)
+      if (request.header('X-Up-Version')) {
+        return view.render('components/partials/pdf-converter')
+      }
+      return view.render('pages/pdf-converter')
     }
   }
 }

@@ -1,7 +1,8 @@
 <div main-section>
     <h1 class="text-2xl font-bold mb-4">Convertisseur PDF vers Image</h1>
         
-    <form action="/convert-pdf" method="POST" enctype="multipart/form-data" class="space-y-4">
+    <form up-target="[main-section]" action="{{route('pdf-converter')}}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        {{ csrfField() }}
         <div>
         <label class="block text-sm font-medium text-gray-700">
             Sélectionnez un PDF
@@ -21,4 +22,9 @@
         Convertir
         </button>
     </form>
+    @if(flashMessages.all())
+        <div>
+            <pre>{{ inspect(flashMessages.all()) }}</pre>
+        </div>
+    @endif
 </div>
