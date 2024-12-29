@@ -1,11 +1,16 @@
-<div main-section>
+<div main-section class="flex flex-col gap-3 items-center justify-center min-h-screen">
     <a 
       href="{{ route('pdf-converter-show') }}"
       up-target="[main-section]"
-      up-method="get"
-      up-instant
-      up-preload
+      class="px-8 py-4 no-underline bg-gray-100 rounded text-gray-700 hover:bg-gray-200 transition-colors"
     >
       pdf-converter
+    </a>
+    <a 
+      href="{{ route('index-maker-show') }}"
+      up-target="[main-section]"
+      class="px-8 py-4 no-underline bg-gray-100 rounded text-gray-700 hover:bg-gray-200 transition-colors"
+    >
+      index-maker
     </a>
 </div>

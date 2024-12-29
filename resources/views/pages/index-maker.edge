@@ -1,0 +1,11 @@
+@layout.app({ title: "Index Maker" })
+  @slot('meta')
+    <meta name="description" content="Index Maker" />
+  @endslot
+
+  @slot('main')
+    @component('components/partials/pdf-converter')
+    @end
+  @endslot
+
+@end
