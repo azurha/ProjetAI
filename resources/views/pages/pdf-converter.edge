@@ -1,0 +1,11 @@
+@layout.app({ title: "PDF Converter" })
+  @slot('meta')
+    <meta name="description" content="PDF Converter" />
+  @endslot
+
+  @slot('main')
+    @component('components/partials/pdf-converter')
+    @end
+  @endslot
+
+@end
