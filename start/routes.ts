@@ -18,4 +18,4 @@ router.get('/pdf-converter-show', [PdfConverterController, 'show']).as('pdf-conv
 router.post('/pdf-converter', [PdfConverterController, 'convert']).as('pdf-converter')
 
 router.get('/index-maker-show', [IndexMakerController, 'show']).as('index-maker-show')
-//router.post('/index-maker', [IndexMakerController, 'convert']).as('index-maker')
+router.post('/index-maker', [IndexMakerController, 'process']).as('index-maker')
